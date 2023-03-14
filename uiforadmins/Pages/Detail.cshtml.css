@@ -1,0 +1,60 @@
+﻿#grid {
+    display: grid;
+    place-content: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 2em;
+}
+
+    #grid > div, #grid1 > div {
+        background-color: #ffffff0a;
+        border-radius: 1.2em;
+    }
+
+        #grid > div > label, #grid1 > div > label {
+            margin-left: auto;
+            margin-right: 1.5em;
+            margin-bottom: auto;
+            margin-top: .75em;
+            color: #ffffff96;
+        }
+h2 {
+    text-align: center;
+    font-size: 3em;
+}
+
+#modal {
+    background-color: #ffffff0a;
+    padding: 4em;
+    border-radius: 75px;
+    min-width: 750px;
+}
+
+button {
+    all: unset;
+    cursor: pointer;
+}
+
+button, a {
+    justify-content: center;
+    border-radius: 1.2em;
+    font-size: 2em;
+}
+
+#grid > div, button, a {
+    display: flex;
+    align-items: center;
+}
+
+#btn-add {
+    background-color: #2800ff3d;
+}
+
+#cancel {
+    background-color: #990d7733;
+}
+@media only screen and (max-width: 2000px) {
+    input, select {
+        font-size: 1.25em;
+    }
+}

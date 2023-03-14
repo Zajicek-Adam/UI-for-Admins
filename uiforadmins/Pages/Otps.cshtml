@@ -1,0 +1,62 @@
+﻿@page
+@model uiforadmins.Pages.OtpsModel
+@{
+}
+<div class="container">
+    <form asp-page="Otps" method="get" class="searchForm" style="margin-right: auto; display: flex; align-items: center;">
+        <a id="home" asp-page="Index">Home</a>
+        <input name="SearchString" value="@Model.CurrentFilter" class="nowidth" type="text" />
+        <input type="submit" id="amogus" width="32" height="32" style="background-image: url('/img/search.png'); background-size: 32px; background-position-y: center; background-position-x: 10px; background-repeat: no-repeat" value="" />
+    </form>
+    <div class="table">
+        @if (Model.Otps.Count == 0)
+        {
+            <span>The list is empty</span>
+        }
+        else
+        {
+            <a style="all: unset; cursor: pointer; color: #c299eb" asp-page="Otps" asp-route-sortOrder="@Model.OTPSort"><input type="text" readonly value="OTP" /> </a>
+            <input type="text" readonly value="Champion" />
+            <input type="text" readonly value="Rank" />
+            <a style="all: unset; cursor: pointer; color: #c299eb" asp-page="Otps" asp-route-sortOrder="@Model.GamesSort">
+                <input type="text" readonly value="Games" />
+            </a>
+            <input type="text" readonly value="Winrate(%)" />
+            <div style="display: flex">
+                <div style="margin: 0.25em; cursor: default;" class="edit"></div>
+                <div style="margin: 0.25em;" class="delete"></div>
+            </div>
+            @foreach (var item in Model.Otps)
+            {
+                <input asp-for="@item.OtpName" type="text" readonly value="@item.OtpName" />
+
+                //      <input type="text" readonly  value="@Model.champions.Find(a => a.ChampionId == item.ChampionId).ChampionName" />
+
+                <select style="background-image:none; opacity: 1;" disabled asp-for="@item.ChampionId" class="form-control">
+                    @foreach (var champ in Model.Champions)
+                    {
+                        if (champ.ChampionId == item.ChampionId)
+                        {
+                            <option selected value="@champ.ChampionId">@champ.ChampionName</option>
+                        }
+                        else
+                        {
+                            <option value="@champ.ChampionId">@champ.ChampionName</option>
+                        }
+                    }
+                </select>
+
+                <select style="background-image:none; opacity: 1; width: 200px;" disabled asp-for="@item.OtpRank" asp-items="Html.GetEnumSelectList<uiforadmins.Model.Rank>()" class="form-control"></select>
+
+                <input asp-for="@item.GamesPlayed" type="number" readonly value="@item.GamesPlayed" />
+                <input asp-for="@item.Winrate" type="number" readonly value="@item.Winrate" />
+                <div style="display: flex">
+                    <a style="margin: 0.25em" class="edit" asp-route-id="@item.OtpId" asp-page="Edit"></a>
+                    <a style="margin: 0.25em" class="delete" asp-page-handler="Delete" asp-route-item="@item.OtpId"></a>
+                </div>
+            }
+
+        }
+        <a asp-page="Create" id="add">Add</a>
+    </div>
+</div>

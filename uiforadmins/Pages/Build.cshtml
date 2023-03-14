@@ -1,0 +1,50 @@
+﻿@page
+@model uiforadmins.Pages.BuildModel
+@{
+}
+<div class="container">
+    <form asp-page="Build" method="get" class="searchForm" style="margin-right: auto; display: flex; align-items: center;">
+        <a id="home" asp-page="Index">Home</a>
+        <input name="SearchString" value="@Model.CurrentFilter" class="nowidth" type="text" />
+        <input type="submit" id="amogus" width="32" height="32" style="background-image: url('/img/search.png'); background-size: 32px; background-position-y: center; background-position-x: 10px; background-repeat: no-repeat" value="" />
+    </form>
+    <div class="table">
+        @if (Model.Builds.Count == 0)
+        {
+            <span>The list is empty</span>
+        }
+        else
+        {
+            <a style="all: unset; cursor: pointer; color: #c299eb" asp-page="Build" asp-route-sortOrder="@Model.BuildSort">
+                <input type="text" readonly value="Description" />
+            </a>
+            <a style="all: unset; cursor: pointer; color: #c299eb" asp-page="Build" asp-route-sortOrder="@Model.WinrateSort">
+                <input type="text" readonly value="Winrate" />
+            </a>
+            <a style="all: unset; cursor: pointer; color: #c299eb" asp-page="Build" asp-route-sortOrder="@Model.PlayrateSort">
+                <input type="text" readonly value="Playrate" />
+            </a>
+            <div style="display: flex">
+                <div style="margin: 0.25em; cursor: default;" class="detail"></div>
+                <div style="margin: 0.25em; cursor: default;" class="edit"></div>
+                <div style="margin: 0.25em;" class="delete"></div>
+            </div>
+            @foreach (var item in Model.Builds)
+            {
+                <input style="width: 250px;" asp-for="@item.Description" type="text" readonly value="@item.Description" />
+
+                <input asp-for="@item.Winrate" type="text" readonly value="@item.Winrate" />
+
+                <input asp-for="@item.Playrate" type="text" readonly value="@item.Playrate" />
+
+                <div style="display: flex">
+                    <a style="margin: 0.25em" class="detail" asp-route-buildId="@item.BuildId" asp-page="Detail"></a>
+                    <a style="margin: 0.25em" class="edit" asp-route-id="@item.BuildId" asp-page="Edit"></a>
+                    <a style="margin: 0.25em" class="delete" asp-page-handler="Delete" asp-route-item="@item.BuildId"></a>
+                </div>
+            }
+
+        }
+        <a asp-page="Create" id="add">Add</a>
+    </div>
+</div>

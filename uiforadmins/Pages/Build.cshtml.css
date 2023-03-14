@@ -1,0 +1,47 @@
+﻿.container {
+    width: 1800px;
+    height: 800px;
+    background-color: #ffffff0a;
+    padding: 3.5em 5em 3.5em 3.5em;
+    border-radius: 50px;
+}
+
+.table {
+    display: grid;
+    padding: 0.2em;
+    grid-template-columns: 300px 170px 170px 200px;
+    column-gap: 19.5em;
+    grid-template-rows: repeat(20, 100px);
+    height: 700px;
+    overflow-y: scroll;
+    place-items: center;
+}
+
+
+@media only screen and (max-width: 2000px) {
+    .container {
+        width: 1200px;
+        height: 500px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .table {
+        grid-template-rows: repeat(7, 1fr);
+        grid-template-columns: 300px 250px 100px 150px;
+        column-gap: 7.5em;
+    
+        }
+
+    input, select {
+        width: 150px;
+    }
+
+    .table::-webkit-scrollbar {
+        width: 0 !important
+    }
+}   
+
+.table::-webkit-scrollbar, .container::-webkit-scrollbar {
+    width: 0 !important
+}

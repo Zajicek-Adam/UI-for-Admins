@@ -1,0 +1,71 @@
+﻿@page
+@model uiforadmins.Pages.ChampionModel
+@{
+}
+<div class="container">
+    <form asp-page="Champion" method="get" class="searchForm" style="margin-right: auto; display: flex; align-items: center;">
+        <a id="home" asp-page="Index">Home</a>
+        <input name="SearchString" value="@Model.CurrentFilter" class="nowidth" type="text" />
+        <input type="submit" id="amogus" width="32" height="32" style="background-image: url('/img/search.png'); background-size: 32px; background-position-y: center; background-position-x: 10px; background-repeat: no-repeat" value="" />
+    </form>
+    <div class="table">
+        @if (Model.Champions.Count == 0)
+        {
+            <span>The list is empty</span>
+        }
+        else
+        {
+            <a style="all: unset; cursor: pointer; color: #c299eb" asp-page="Champion" asp-route-sortOrder="@Model.ChampSort">
+                <input type="text" readonly value="Champion" />
+            </a>
+            <input type="text" readonly value="Build" />
+            <input type="text" readonly value="Best OTP" />
+            <a style="all: unset; cursor: pointer; color: #c299eb" asp-page="Champion" asp-route-sortOrder="@Model.GamesSort">
+                <input type="text" readonly value="Games" />
+            </a>
+            <input type="text" readonly value="Winrate(%)" />
+            <div style="display: flex">
+                <div style="margin: 0.25em; cursor: default;" class="edit"></div>
+                <div style="margin: 0.25em;" class="delete"></div>
+            </div>
+            @foreach (var item in Model.Champions)
+            {
+                <input asp-for="@item.ChampionName" type="text" readonly value="@item.ChampionName" />
+
+                //      <input type="text" readonly  value="@Model.champions.Find(a => a.ChampionId == item.ChampionId).ChampionName" />
+
+                <select style="background-image:none; opacity: 1; width: 300px;" disabled asp-for="@item.BuildId" class="form-control">
+                    @foreach (var build in Model.Builds)
+                    {
+                        if (build.BuildId == item.BuildId)
+                        {
+                            <option selected value="@build.BuildId">@build.Description</option>
+                        }
+                        else
+                        {
+                            <option value="@build.BuildId">@build.Description</option>
+                        }
+                    }
+                </select>
+
+                if (item.ChampionOtps != null)
+                {
+                    <input asp-for="@item.ChampionOtps" type="text" readonly value="@item.ChampionOtps.OrderByDescending(x => x.Winrate).ToList().ElementAt(0).OtpName" />
+                }
+                else
+                {
+                    <input asp-for="@item.ChampionOtps" type="text" readonly value="No otps yet" />
+                }
+
+                <input asp-for="@item.ChampionGames" type="number" readonly value="@item.ChampionGames" />
+                <input asp-for="@item.ChampionWinrate" type="number" readonly value="@item.ChampionWinrate" />
+                <div style="display: flex">
+                    <a style="margin: 0.25em" class="edit" asp-route-id="@item.ChampionId" asp-page="Edit"></a>
+                    <a style="margin: 0.25em" class="delete" asp-page-handler="Delete" asp-route-item="@item.ChampionId"></a>
+                </div>
+            }
+
+        }
+        <a asp-page="Create" id="add">Add</a>
+    </div>
+</div>

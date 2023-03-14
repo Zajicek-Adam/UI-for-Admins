@@ -1,0 +1,207 @@
+html, body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+html {
+  font-family: 'Jost', sans-serif;
+}
+body {
+    background: linear-gradient(to right, #5C3999, #2D2C6B);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+a img{
+    margin-top: 1em;
+    transform: scale(0.75);
+}
+h1{
+    font-size: 6.75em;
+    margin: 0.5em;
+    font-weight: 300;
+}
+h2 {
+    font-weight: 300;
+    font-size: 1.2em;
+    margin: 0;
+    margin-top: -0.25em;
+    margin-bottom: 1em;
+    font-family: 'Raleway', sans-serif;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+
+
+.table a, .delete {
+    border-radius: 20px;
+    background-color: #ffffff0a;
+    padding: 1em;
+    background-size: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.delete {
+    width: 32px;
+    height: 32px;
+    background-image: url("../img/x.png");
+}
+a.edit {
+    width: 32px;
+    height: 32px;
+    background-image: url("../img/edit.png");
+    background-position-x: 18px;
+}
+div.edit {
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: #ffffff0a;
+    padding: 1em;
+    background-size: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 32px;
+    height: 32px;
+    background-image: url("../img/edit.png");
+    background-position-x: 18px;
+}
+.detail {
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: #ffffff0a;
+    padding: 1em;
+    background-size: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 52px;
+    height: 32px;
+    background-image: url("../img/options.png");
+}
+#add {
+    background-image: url("../img/add.png");
+    font-size: 2em;
+    background-position-x: 1em;
+    margin: 1em 0;
+    padding: 0.5em 1.5em 0.5em 2.5em;
+    position: relative;
+    left: 0.8em;
+    margin-right: auto;
+}
+input {
+    all: unset;
+    padding: 1em;
+    font-size: 1.75em;
+    border-radius: 1em;
+    margin: 0 0.5em;
+}
+    input.editable {
+        background-color: #ffffff0a;
+    }
+    input:read-only.editable {
+        background-color: transparent;
+    }
+
+select {
+    padding: 1em;
+    padding-left: 0;
+    margin: 0;
+    width: 250px;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    background-color: transparent;
+    border: none;
+    line-height: inherit;
+    color: white;
+    font-size: 1.75em;
+    border-radius: 1em;
+    appearance: none;
+    background-image: url("../img/arrow.png");
+    background-repeat: no-repeat;
+    background-size: 32px;
+    background-position-x: 190px;
+    background-position-y: 35px;
+}
+select:focus{
+    outline: none;
+    border: none;
+}
+option{
+    color: black;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+#save, #home {
+    padding: 1em 1em 1em 4em;
+    font-size: 1.75em;
+    background-color: #ffffff0a;
+    border-radius: 25px;
+    margin: 0.2em;
+    background-repeat: no-repeat;
+    background-position-y: center;
+}
+#home {
+    background-image: url("../img/home.png");
+    background-size: 2.75em;
+    background-position-x: 20px;
+}
+#save {
+    background-image: url("../img/save.png");
+    background-size: 2.25em;
+    background-position-x: 20px;
+    outline: none;
+    border: none;
+    color: white;
+}
+.table{
+    margin-top: 25px;
+    width: inherit;
+    height: inherit;
+}
+form:not(.searchForm) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+@media only screen and (max-width: 2000px) {
+
+    .table {
+        grid-template-rows: repeat(7, 1fr);
+        overflow-x: hidden;
+    }
+
+    input:not(.nowidth, .detailForm), select:not(.detailForm) {
+        width: 150px;
+        font-size: 1.25em;
+    }
+}
+input.nowidth {
+    background-color: #ffffff0a;
+    width: 250px;
+    margin-left: 1em;
+}
+#amogus{
+    margin: 0;
+    cursor: pointer;
+}
+.container:not(#noborder){
+    border: 7.5px transparent solid;
+}

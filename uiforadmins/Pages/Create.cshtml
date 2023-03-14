@@ -1,0 +1,135 @@
+﻿@page
+@model uiforadmins.Pages.CreateModel
+@{
+}
+<form method="post">
+    <div id="modal">
+        @switch (Model.TableId)
+        {
+            case 0:
+                <h2>Add OTP</h2>
+                <div id="grid">
+                    <div>
+                        <input type="text" asp-for="FormOtp.OtpName" />
+                        <label>otp's name</label>
+                        <span asp-validation-for="FormOtp.OtpName"></span>
+                    </div>
+
+                    <div>
+                        <select style="margin-left: 1em; background-position-y: center" asp-for="FormOtp.ChampionId" class="form-control">
+                            @foreach (var champ in Model.Champions)
+                            {
+                                <option value="@champ.ChampionId">@champ.ChampionName</option>
+                            }
+                        </select>
+                        <label>champion</label>
+                        <span asp-validation-for="FormOtp.ChampionId"></span>
+                    </div>
+
+                    <div style="grid-column: span 2">
+                        <select style="margin-left: 1em; width: 100%; background-position-x: 160px; background-position-y: center" asp-for="FormOtp.OtpRank" asp-items="Html.GetEnumSelectList<uiforadmins.Model.Rank>()" class="form-control"></select>
+                        <label style="white-space: nowrap">otp's rank</label>
+                        <span asp-validation-for="FormOtp.OtpRank"></span>
+                    </div>
+
+                    <div>
+                        <input type="number" asp-for="FormOtp.GamesPlayed" />
+                        <label>games played</label>
+                        <span asp-validation-for="FormOtp.GamesPlayed"></span>
+                    </div>
+                    <div>
+                        <input type="number" asp-for="FormOtp.Winrate" />
+                        <label>winrate</label>
+                        <span asp-validation-for="FormOtp.Winrate"></span>
+                    </div>
+                    <button id="btn-add" type="submit">Add</button>
+                    <a id="cancel" href="Otps">Cancel</a>
+                </div>
+                break;
+            case 1:
+                <h2>Add Champion</h2>
+                <div id="grid1">
+                    <div>
+                        <input type="text" asp-for="FormChampion.ChampionName" />
+                        <label>champion</label>
+                        <span asp-validation-for="FormChampion.ChampionName"></span>
+                    </div>
+
+                    <div>
+                        <select style="margin-left: 1em; background-position-y: center" asp-for="FormChampion.BuildId" class="form-control">
+                            @foreach (var build in Model.Builds)
+                            {
+                                <option value="@build.BuildId">@build.Description</option>
+                            }
+                        </select>
+                        <label>build</label>
+                        <span asp-validation-for="FormChampion.BuildId"></span>
+                    </div>
+
+                    <div>
+                        <input type="number" asp-for="FormChampion.ChampionGames" />
+                        <label>games played</label>
+                        <span asp-validation-for="FormChampion.ChampionGames"></span>
+                    </div>
+                    <div>
+                        <input type="number" asp-for="FormChampion.ChampionWinrate" />
+                        <label>winrate</label>
+                        <span asp-validation-for="FormChampion.ChampionWinrate"></span>
+                    </div>
+                    <button id="btn-add" type="submit">Add</button>
+                    <a id="cancel" href="Champion">Cancel</a>
+                </div>
+                break;
+            case 2:
+                <h2>Add Item</h2>
+                <div id="grid">
+                    <div>
+                        <input type="text" asp-for="FormItem.ItemName" />
+                        <label>item</label>
+                        <span asp-validation-for="FormItem.ItemName"></span>
+                    </div>
+                    <div>
+                        <input type="number" asp-for="FormItem.ItemCost" />
+                        <label>cost</label>
+                        <span asp-validation-for="FormItem.ItemCost"></span>
+                    </div>
+
+                    <div style="grid-column: span 2">
+                        <select style="margin-left: 1em; width: 100%; background-position-x: 160px; background-position-y: center" asp-for="@Model.FormItem.ItemRarity" asp-items="Html.GetEnumSelectList<uiforadmins.Model.Rarity>()" class="form-control"></select>
+                        <label style="white-space: nowrap">item's rarity</label>
+                        <span asp-validation-for="FormItem.ItemRarity"></span>
+                    </div>
+                    <div style="grid-column: span 2">
+                        <input type="text" asp-for="FormItem.ItemDescription" />
+                        <label>description</label>
+                        <span asp-validation-for="FormItem.ItemDescription"></span>
+                    </div>
+                    <button id="btn-add" type="submit">Add</button>
+                    <a id="cancel" href="Item">Cancel</a>
+                </div>
+                break;
+            case 3:
+                <h2>Add Build</h2>
+                <div id="grid">
+                    <div style="grid-column: span 2">
+                        <input type="text" asp-for="FormBuild.Description" />
+                        <label>build</label>
+                        <span asp-validation-for="FormBuild.Description"></span>
+                    </div>
+                    <div style="grid-column: span 2">
+                        <input type="number" asp-for="FormBuild.Winrate" />
+                        <label>winrate</label>
+                        <span asp-validation-for="FormBuild.Winrate"></span>
+                    </div>
+                    <div style="grid-column: span 2">
+                        <input type="text" asp-for="FormBuild.Playrate" />
+                        <label>playrate</label>
+                        <span asp-validation-for="FormBuild.Playrate"></span>
+                    </div>
+                    <button id="btn-add" type="submit">Add</button>
+                    <a id="cancel" href="Build">Cancel</a>
+                </div>
+                break;
+        }
+    </div>
+</form>

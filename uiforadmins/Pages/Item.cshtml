@@ -1,0 +1,51 @@
+﻿@page
+@model uiforadmins.Pages.ItemModel
+@{
+}
+<div class="container">
+    <form asp-page="Item" method="get" class="searchForm" style="margin-right: auto; display: flex; align-items: center;">
+        <a id="home" asp-page="Index">Home</a>
+        <input name="SearchString" value="@Model.CurrentFilter" class="nowidth" type="text" />
+        <input type="submit" id="amogus" width="32" height="32" style="background-image: url('/img/search.png'); background-size: 32px; background-position-y: center; background-position-x: 10px; background-repeat: no-repeat" value="" />
+    </form>
+    <div class="table">
+        @if (Model.Items.Count == 0)
+        {
+            <span>The list is empty</span>
+        }
+        else
+        {
+            <a style="all: unset; cursor: pointer; color: #c299eb" asp-page="Item" asp-route-sortOrder="@Model.ItemSort">
+                <input style="width: 175px;" type="text" readonly value="Item" />
+            </a>
+            <input type="text" readonly value="Description" />
+            <a style="all: unset; cursor: pointer; color: #c299eb" asp-page="Item" asp-route-sortOrder="@Model.RaritySort">
+                <input type="text" readonly value="Rarity tier" />
+            </a>
+            <a style="all: unset; cursor: pointer; color: #c299eb" asp-page="Item" asp-route-sortOrder="@Model.CostSort">
+                <input type="text" readonly value="Cost" />
+            </a>
+            <div style="display: flex">
+                <div style="margin: 0.25em; cursor: default;" class="edit"></div>
+                <div style="margin: 0.25em;" class="delete"></div>
+            </div>
+            @foreach (var item in Model.Items)
+            {
+                <input style="width: 200px;" asp-for="@item.ItemName" type="text" readonly value="@item.ItemName" />
+
+                <input style="width: 350px;" asp-for="@item.ItemDescription" type="text" readonly value="@item.ItemDescription" />
+
+                <select style="background-image:none; opacity: 1;" disabled asp-for="@item.ItemRarity" asp-items="Html.GetEnumSelectList<uiforadmins.Model.Rarity>()" class="form-control"></select>
+
+                <input asp-for="@item.ItemDescription" type="text" readonly value="@item.ItemCost" />
+
+                <div style="display: flex">
+                    <a style="margin: 0.25em" class="edit" asp-route-id="@item.ItemId" asp-page="Edit"></a>
+                    <a style="margin: 0.25em" class="delete" asp-page-handler="Delete" asp-route-item="@item.ItemId"></a>
+                </div>
+            }
+
+        }
+        <a asp-page="Create" id="add">Add</a>
+    </div>
+</div>

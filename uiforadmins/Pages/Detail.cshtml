@@ -1,0 +1,44 @@
+﻿@page
+@model uiforadmins.Pages.DetailModel
+@{
+}
+<form method="post">
+    <div id="modal">
+        <h2>Add Item to @Model.Builds.First(i => i.BuildId == Model.Stored).Description </h2>
+        <div id="grid">
+            <div style="grid-column: span 2;">
+                <select class="detailForm" style="margin-left: 1em; background-position-y: center; width: 350px; font-size: 1.35em;" asp-for="SelectedItemId">
+                    @foreach (var item in Model.Items)
+                    {
+                        if (!Model.FormBuild.Items.Contains(item))
+                        {
+                            <option value="@item.ItemId">@item.ItemName</option>
+                        }
+                    }
+                <option disabled selected value="">Choose an item</option>
+                </select>
+                <label>add item</label>
+            </div>
+            @if (Model.FormBuild == null || Model.FormBuild.Items == null)
+            {
+                <div>
+                    <input type="text" readonly value="No items yet" />
+                </div>
+            }
+            else
+            {
+                @foreach (var item in Model.FormBuild.Items)
+                {
+                    <div>
+                        <input class="detailForm" type="text" readonly value="@item.ItemName" />
+                        <label>item in build</label>
+                    </div>
+                }
+            }
+
+            <button id="btn-add" type="submit">Add</button>
+            <a id="cancel" href="Build">Cancel</a>
+        </div>
+    </div>
+    <input tabindex="-1" type="number" asp-for="Stored" style="position: absolute; top: 50000px;" />
+</form>
